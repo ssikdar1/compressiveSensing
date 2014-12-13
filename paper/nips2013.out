@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Problem Premise}{}% 2
+\BOOKMARK [1][-]{section.3}{Linear Regression}{}% 3
+\BOOKMARK [1][-]{section.4}{Page Rank Algorithm}{}% 4
+\BOOKMARK [1][-]{section.5}{Finding Shortest Path}{}% 5
+\BOOKMARK [1][-]{section.6}{Compressive Sensing Techniques}{}% 6
+\BOOKMARK [2][-]{subsection.6.1}{Radon Basis Pursuit}{section.6}% 7
+\BOOKMARK [2][-]{subsection.6.2}{Sparse Recovery with Graphs}{section.6}% 8
+\BOOKMARK [2][-]{subsection.6.3}{L1-minimization}{section.6}% 9
+\BOOKMARK [1][-]{section.7}{Results}{}% 10
+\BOOKMARK [2][-]{subsection.7.1}{Linear Regression}{section.7}% 11
+\BOOKMARK [2][-]{subsection.7.2}{Page Rank}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.3}{Shortest Path}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.4}{Sparse Recovery of Graph}{section.7}% 14
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 15
