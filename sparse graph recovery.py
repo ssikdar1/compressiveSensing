@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[88]:
+# In[29]:
 
 import pandas as pd
 import numpy as np
@@ -12,21 +12,21 @@ import networkx as nx
 import random
 
 
-# In[89]:
+# In[43]:
 
 #parameters
-numMeasurements = 10
+numMeasurements = 100
 treeDepth = 2
 
 
-# In[90]:
+# In[44]:
 
 #load the node and edge data
 nodes = pd.read_pickle('C:\Users\Shan\Documents\GitHub\\compressiveSensing\\nodes.pkl')
 edges = pd.read_pickle('C:\Users\Shan\Documents\GitHub\\compressiveSensing\edges.pkl')
 
 
-# In[91]:
+# In[45]:
 
 #
 # create graph
@@ -45,7 +45,7 @@ for i in range(0,len(guid_1)):
 G = nx.parse_edgelist(adj_list, nodetype = str, data=(('weight',float),))
 
 
-# In[92]:
+# In[46]:
 
 #get the m << n measurements, choose m random vertices and put them into a list to iterate through later
 randomNodes = []
@@ -78,8 +78,7 @@ for i in range(0,len(randomNodes)):
 
 
 
-# In[117]:
-
+# In[47]:
 
 
 #
@@ -97,14 +96,15 @@ def drillToDepth(node_guid, curr_level, depth, result):
 
 
 
-# In[ ]:
+# In[70]:
 
 #
 # Now need to obtain the measurements y_i for each randomly chosen node
 #
 
 y = [] #this is our y in y = Ax, each entry y_i a measurement sum
-A = []
+s = (len(randomNodes),len(nodes))
+A = np.zeros(s)
 
 #iterate through all our random chosen nodes
 for i in range(0,len(randomNodes)): 
@@ -124,58 +124,65 @@ for i in range(0,len(randomNodes)):
             measurement_sum += len(nx.shortest_path(G,'SEED-1',n,weight='weight'))
         except:
             #no networkx path to seed-1
-            measurement_sum = 0
+#             measurement_sum = 0
+            pass
     y.append(measurement_sum)
     
-    irow =[]
-    row_iterator = nodes.iterrows()
-    for i, row in row_iterator:
-        if row['GUID'] in nodesInClique:
-            irow.append(1)
-        else:
-            irow.append(0)
-    A.append(irow)
+    #for every node in the clique change its corresponding position to 1
+    for gid in nodesInClique:
+        j = int(nodes[nodes['GUID'] == gid].index.values.tolist()[0])
+        A[i,j] = 1
+    
 
 
-# In[138]:
+# In[49]:
 
 print nodesInClique 
 print y
 
 
-# In[112]:
+# In[71]:
+
+print A
 
 
+# In[72]:
+
+# just checking there are actually 1's in this A matrix 
+for k in A:
+    indices = [i for i, x in enumerate(k) if x == 1]
+    print indices
 
 
-# In[114]:
+# In[73]:
 
-#now for each node look at tree of depth h
-
-    guid = nodes.loc[randomNodes[i]]['GUID']
-    #  G[1]  adjacency dict keyed by neighbor to edge attributes Note: you should not change this dict manually!
-    print len(G[guid])
-
-
-# In[108]:
-
-for key in G['ID-a57dd69b-916c-4a39-8d95-bd9b76c64f38']:
-    print key
+#write the y and A to spereate files
+import csv
+with open('C:\Users\Shan\Documents\GitHub\\compressiveSensing\\y_vector.csv', 'wb') as f:
+    writer = csv.writer(f)
+    writer.writerow(y)
 
 
-# In[85]:
+# In[80]:
 
-H = nx.Graph()
-H.add_node(1)
+with open('C:\Users\Shan\Documents\GitHub\\compressiveSensing\\A_matrix.csv', 'wb') as f1:
+    writer1 = csv.writer(f1)
+    for row in A:
+        writer1.writerow(row)
 
 
-# In[87]:
+# In[75]:
 
-len(H[1])
+# np.savetxt('C:\Users\Shan\Documents\GitHub\\compressiveSensing\\A_matrix.csv', A, delimiter=',')
 
 
                 
                 
+# In[78]:
+
+A.shape
+
+
 # In[ ]:
 
 
