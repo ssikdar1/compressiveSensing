@@ -60,7 +60,7 @@ Frequently real world problems involve datasets with a large number of instances
 %talk about compressive sensing + graphs/clique detection/other relevant matters
 
 
-Compressive sensing has emerged within the past decade as a new method of signal/image sampling that challenges traditional methods that rely on high sampling rates. This technique was first described in works [Candes' 2 original papers] [Donoho's original paper] and centers on two concepts - sparsity and incoherence. Sparsity measures how concisely a signal can be represented as, while incoherence is a measure of the lack of correlation between the sensing basis $\phi$ and the representation basis $\psi$ . Generally, compressive sensing problems are framed as the recovery of $x$, a discrete signal, from $y$, the sampled/sensed data. $x \in  \mathbb{R}^n$ is recovered from $y=Ax \in  \mathbb{R}^m $, where $m$ is the number of available measurements, $n$ is the dimension of the signal $y$, $A$ is the $m \times n$ sensing matrix, and $m << n$  in undersampled situations [Candes intro article].
+Compressive sensing has emerged within the past decade as a new method of signal/image sampling that challenges traditional methods that rely on high sampling rates. This technique was first described in works [Candes] [Donoho] and centers on two concepts - sparsity and incoherence. Sparsity measures how concisely a signal can be represented as, while incoherence is a measure of the lack of correlation between the sensing basis $\phi$ and the representation basis $\psi$ . Generally, compressive sensing problems are framed as the recovery of $x$, a discrete signal, from $y$, the sampled/sensed data. $x \in  \mathbb{R}^n$ is recovered from $y=Ax \in  \mathbb{R}^m $, where $m$ is the number of available measurements, $n$ is the dimension of the signal $y$, $A$ is the $m \times n$ sensing matrix, and $m << n$  in undersampled situations [Candes].
 
 
 Compressive sensing's applications extend beyond digital images and digital signals. Compressive sensing can also be utilized to examine cliques, groups, and networks. [Shi,Tang,Xu, Moscibroda] [Siyari] [Haupt] Compressive sensing has also been applied in a variety of ways in medicine, including increasing the efficiency of magnetic resonance imaging (MRI) through compressive sensing reconstruction [Lutsig et al]; using compressive sensing approaches (Gradient Projection for Sparse Reconstruction and Belief Propogation) for screening of rare genetic diseases [Erlich etal]; and by using probabilistic tests and compressive sensing to identify a group of infected individuals [Cheraghchi et al]. 
@@ -167,7 +167,7 @@ Looking at a subset of nodes  $S \subseteq G$, define $E_S$ as the subset of edg
 Let $y = \{ y_1, y_2, y_3 ... y_m \}$ denote randomly chosen measurements such that $m << n$.  Let $A$ be an $m x n$ measurement matrix such that its $i$th row corresponds to the $i$th measurement.  For a particular entry $A_{ij}$, $A_{ij} = 1$ if  node $j$ is included in the $i$th measurement and $A_{ij} = 0$ otherwise.
 Note that we can write the above situation much more compactly as $y = Ax$. This equation is now in the same form used in compressive sensing and sparse recovery.  Compressive sensing theory suggests that the $n$-dimensional vectors can be found from $m$ measurements if the vectors are sparse enough. Therefore $\ell_1$- minimization can be used to recover the sparse vectors using $m$ random measurements.  After the vectors are recovered, the maximal entries in $x$  will denote the nodes most similar to the SEED node. Thus this can be seen as the set of potential disease carriers and a shortest path approach should be able to identify the person.
 \subsection{$\ell_1$--minimization}
-should this be here? or should a discussion about which $\ell_1$ minimization technique used from L1 magic in the section above and/or results
+Given a matrix  A of dimensions M x N with full rank and $y \in \mathbf{R}^M$, look at the equation $min ||x||_1$ s.t. $Ax=b$. An L1 minimization with equality constraintts finds the vector x with the smallest $l_1$ norm. The proceses of finding the smallest x is known as basis pursuit.
 
 
 
@@ -188,6 +188,7 @@ Using the linear regression method described above, we successfully found the re
 \end{table}
 
 \subsection{Page Rank}
+For page rank we hoped that the rank of Seed-1 and Seed-2 would indicate which other nodes of information was most closley relevant, however the rank of Seed-1 and Seed-2 turned out to be average ranking exactly in the middle, making it impossible to draw out any further conclusions.
 
 \subsection{Shortest Path}
 The initial shortest path returned a series of nodes that primarily included information about a woman. Since the information provided indicated the person of interest was male, the last edge between the final pair of nodes on the shortest path was removed and the shortest path algorithm was run again. This time the shortest path eventually led us to nodes containing information about a male. Upon investigating the intersection sets of the paths, information was found possibly sugessting that the woman in the first path was in fact married to the man identified in the second path. After obtaining the second shortest path, we again removed the last edge in the path and ran the shortest path algorithm on the remaining graph.The algorithm yieled no shortest path between the two nodes. 
@@ -203,7 +204,7 @@ First Shortest Path:
 
 %SEED &   NaN & NaN  & NaN & NaN & NaN & NaN & 2129887XX  &  NaN \\ \hline
 %SLRU &  NaN & Brandybuck  & D & Gloriana & 3306 Rosewood Lane & New York& NY &10003    & 2129987506       &  NaN \\ \hline
-Source &LastName &MiddleName &FirstName &Street &City &State & Zip & Phone & ID-DOC \\ \hline
+
   SEED  &     NaN &       NaN &      NaN &   NaN & NaN &  NaN & NaN &   21299875XX &    NaN \\ \hline
   SRLU  & Brandybuck &  D & Gloriana & 3306 Rosewood Lane & New York &   NY &10003&2129987506&    NaN \\ \hline
   CCCR  & Brandybuck & Donnamira &  Gloriana & 2719 Pin Oak Drive & Manhattan &   NY &10018&  NaN &5.33E+15\\ \hline
@@ -223,7 +224,7 @@ Second Shortest Path:
 
 %SEED &   NaN & NaN  & NaN & NaN & NaN & NaN & 2129887XX  &  NaN \\ \hline
 %SLRU &  NaN & Brandybuck  & D & Gloriana & 3306 Rosewood Lane & New York& NY &10003    & 2129987506       &  NaN \\ \hline
-Source & LastName& MiddleName& FirstName& Street& City& State&  Zip&   Phone&  ID-DOC  \\ \hline
+
 SEED&        NaN&        NaN&    NaN&   NaN&  NaN&   NaN&  NaN&   21299875XX&     NaN \\ \hline
    SRLU&  Brandybuck&   D&  Gloriana&  3306 Rosewood Lane&  New York&  NY&  10003&   2129987506&     NaN  \\ \hline
    CCCR&   Brandybuck&  Donnamira&   Gloriana&  2719 Pin Oak Drive&  Manhattan&    NY&  10018&   NaN&  5.334857e+15      \\ \hline
@@ -236,13 +237,16 @@ SEED&        NaN&        NaN&    NaN&   NaN&  NaN&   NaN&  NaN&   21299875XX&   
 \end{tabular}
 \end{table}
 
+\newpage
 \subsection{Sparse Recovery of Graph}
 
-
-
+For sparse recovery was carried out by expereimenting with the number of measurements needed as well as the depth of the nieghborhood to look at 
 
 \section{Conclusion}
-In conclusion 
+Our experiments suggest that path discovery can be a viable method for determning the relationship between two pieces of information.
+If both information live on the same connected component, then iterations of shortest path algorithms can be very sucessful.
+Regression can be also highly useful in our specific problem to infer the information necessary to create new edges between two nodes however is computationally too expensive. Our experiments using compressive sensing suggest that sparse recovery can give an effective subset of nodes to investigate.
+However further work needs to be done, in making sparse recovery return more useful information as well as more efficient.
 
 
 
@@ -300,8 +304,7 @@ In conclusion
 [X] X. Y. Jiang, Y. Yao, H. Liu, and L. Guibas, "Detecting network cliques with radon basis pursuit," in {\it Proceedings of the 15th International Conference on Artificial Intelligence and Statistics (AISTATS)}, 2012, pp. 565-573.
 
 %http://people.ece.cornell.edu/atang/pub/12/Infocom12.pdf
-[?] M. Wang, W. Xu, E. Mallada, and A. Tang, "Sparse recovery with graph constraints: Fundamental limits and measurement construction," in {\it 2012 Proceedings IEEE INFOCOM}, 2012, pp. 1871-1879.
-
+[Z] M. Wang, W. Xu, E. Mallada, and A. Tang, "Sparse recovery with graph constraints: Fundamental limits and measurement construction," in {\it 2012 Proceedings IEEE INFOCOM}, 2012, pp. 1871-1879.
 
 
 \end{document}
